@@ -5,7 +5,7 @@
   "repository": "git@github.com:Bendjen/parcel.git",
   "author": "JiaShen <unbolibob@foxmail.com>",
   "scripts": {
-    "start": "parcel index.html --no-cache",
+    "start": "parcel index.html",
     "build": "parcel build index.html --no-minify --no-cache --out-dir docs ",
     "dist": "parcel build index.html",
     "test": "jest --coverage"
@@ -29,6 +29,9 @@
     "regenerator-runtime": "^0.11.1"
   },
   "dependencies": {
+    "@cycle/dom": "^20.2.0",
+    "@cycle/isolate": "^3.2.0",
+    "@cycle/run": "^4.1.0",
     "animejs": "^2.2.0",
     "antd": "^3.0.2",
     "flex.css": "^1.1.7",
@@ -39,6 +42,7 @@
     "react-router-dom": "^4.2.2",
     "react-syntax-highlighter": "^6.1.1",
     "rxjs": "^5.5.6",
-    "single-spa": "^3.7.0"
+    "single-spa": "^3.7.0",
+    "xstream": "^11.2.0"
   }
 }

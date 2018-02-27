@@ -12,5 +12,12 @@ export default {
     route: "detail",
     id: "serviceGenerator",
     type: "document"
+  },
+  reactiveProgramming: {
+    title: "基于cyclejs的响应式编程初试",
+    dependencies:['cycle','xstream','rxjs'],
+    img: "img/javaScript/reactiveProgramming.png",
+    route: "detail",
+    id: "reactiveProgramming",
   }
 };

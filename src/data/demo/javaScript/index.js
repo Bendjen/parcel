@@ -1,3 +1,4 @@
 export default {
-    microFront : require('./microFront').default
+    microFront : require('./microFront').default,
+    reactiveProgramming : require('./reactiveProgramming').default
 }
