@@ -1,10 +1,7 @@
-const htmlText =
-``
+const htmlText = ``;
 
-const cssText = 
-``
+const cssText = ``;
 
-const javaScriptText = 
-`--`
+const javaScriptText = `--`;
 
-export default {htmlText,cssText,javaScriptText}
+export default { htmlText, cssText, javaScriptText };
