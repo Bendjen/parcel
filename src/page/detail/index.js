@@ -92,7 +92,7 @@ class Detail extends React.Component {
     let dependencies =
       menuList[routeParams.type][routeParams.id].dependencies || [];
     let dependenciesText = dependencies.join("、");
-    console.log(demoList[routeParams.type]);
+    // console.log(demoList[routeParams.type]);
     return (
       <div className={style.container}>
         <QueueAnim

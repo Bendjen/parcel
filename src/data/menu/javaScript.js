@@ -28,5 +28,12 @@ export default {
     id: "privateVariable",
     reference: "https://mp.weixin.qq.com/s/8yyI1bB8eYu3-fCoDJM4Og",
     type: "document"
+  },
+  bidirectionalBindings: {
+    title: "用JS实现双向绑定",
+    img: "img/javaScript/bidirectionalBindings.png",
+    route: "detail",
+    id: "bidirectionalBindings",
+    reference: "https://mp.weixin.qq.com/s/mOs0QKayQlA7wbri4XZDfA"
   }
 };

@@ -16,14 +16,14 @@ class Shape{
 
 const square = new Shape(10, 10);
 
-console.log(square); //{ _width:10 , _height:10 }
+console.log(square); // Shape {_width:10,_height:10}
+console.log(JSON.stringify(square)) // {"_width":10,"_height":10}
     `
   },
   {
     title: "WeakMap",
 
-    text: `
-//使用 WeakMap 来存储所有私有值
+    text: `//使用 WeakMap 来存储所有私有值
 //可以起到限制私有属性访问的作用，但它依赖于一个放在类外面的可以访问和操作的 WeakMap 变量
 
 const map = new WeakMap();
@@ -46,7 +46,8 @@ class Shape{
 
 const square = new Shape(10, 10);
 
-console.log(square);  // {}       
+console.log(square);  // Shape {}  
+console.log(JSON.stringify(square)) // {}      
     `
   },
   {
@@ -69,7 +70,8 @@ class Shape {
 
 const square = new Shape(10, 10);
 
-console.log(square);   // { [Symbol(width)]: 10, [Symbol(height)]: 10 }`
+console.log(square);   // Shape { [Symbol(width)]: 10, [Symbol(height)]: 10 }
+console.log(JSON.stringify(square)) // {}`
   },
   {
     title: "闭包",
@@ -95,13 +97,14 @@ function Shape() {
 
 const square = new Shape(10, 10);   //这里new是为了保持类的使用形式
 
-console.log(square);  // {}
+console.log(square);  // Shape {}
+console.log(JSON.stringfy(square));  // {}
     `
   },
   {
     title: "Proxy",
     text: `//用原型代理本质是在约定命名基础添加了外部访问的拦截器，丢出错误来终止外部访问的效果
-    
+
 class Shape {
     constructor(width, height) {
         this._width = width;
@@ -116,7 +119,17 @@ const handler = {
     get: function (target, key) {
         if (key[0] === '_') {
             throw new Error('Attempt to access private property');
+        } else if (key === 'toJSON') {
+            //JSON.stringfy会访问到私有属性报错，用内部新定义的方法覆盖默认的JSON.stringfy
+            const obj = {};
+            for (const key in target) {
+                if (key[0] !== '_') {           // 只复制公共属性
+                    obj[key] = target[key];
+                }
+            }
+            return () => obj;
         }
+
         return target[key];
     },
     set: function (target, key, value) {
@@ -124,12 +137,46 @@ const handler = {
             throw new Error('Attempt to access private property');
         }
         target[key] = value;
+    },
+    //遍历仍会访问到私有属性，通过拦截器拦截对私有属性的遍历
+    getOwnPropertyDescriptor(target, key) {
+        const desc = Object.getOwnPropertyDescriptor(target, key);
+        if (key[0] === '_') {
+            desc.enumerable = false;
+        }
+        return desc;
     }
 }
 
 const square = new Proxy(new Shape(10, 10), handler);
 
-console.log(square);             // Error: Attempt to access private property`
+console.log(square);             // Shape { _width: 10, _height: 10 }
+console.log(square._width)       // Error: Attempt to access private property
+console.log(JSON.stringify(square))  // {}    
+    `
+  },{
+      title:'未来',
+      text:`//新提案
+class Shape {
+
+    #height;
+    #width;
+    
+    constructor(width, height) {
+        this.#width = width;
+        this.#height = height;
+    }
+    
+    get area() {
+        return this.#width * this.#height;
+    }
+}
+const square = new Shape(10, 10);
+
+console.log(square);                 // Shape {}
+console.log(square.#width);          // Error: Attempt to access private property
+console.log(JSON.stringfy(square))   // {}
+      `
   }
 ];
 

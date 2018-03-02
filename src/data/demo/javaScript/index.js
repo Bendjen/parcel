@@ -1,4 +1,5 @@
 export default {
     microFront : require('./microFront').default,
-    reactiveProgramming : require('./reactiveProgramming').default
+    reactiveProgramming : require('./reactiveProgramming').default,
+    bidirectionalBindings : require('./bidirectionalBindings').default,
 }
