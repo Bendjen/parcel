@@ -48,8 +48,8 @@ class Home extends React.Component {
                     to={`/detail/${type}/${son.id}`}
                     data-flex="dir:top main:center cross:center"
                   >
-                    <img src={"./dist/" + son.img} />
-                    {/* <img src={son.img} /> */}
+                    {/* <img src={"./dist/" + son.img} /> */}
+                    <img src={son.img} />
                     <span>{son.title}</span>
                   </Link>
                 </li>
