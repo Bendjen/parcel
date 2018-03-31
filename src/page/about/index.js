@@ -15,8 +15,38 @@ class About extends React.Component {
           type={["bottom", "top"]}
           ease={["easeOutQuart", "easeInOutQuart"]}
         >
-          <section key="aboutMe">
+          <section key="AboutMe">
             <h1 className={style.title}>关于我</h1>
+            <div className={style.content}>
+              <div>
+                姓名：郑家燊
+              </div>
+              <div>
+                毕业学校：福建农林大学本科（2017年毕业）
+              </div>
+              <div>
+                英语水平：评语六级
+              </div>
+              <div>兴趣爱好：游泳、钢琴</div>
+              <div>工作经历：有近一年前端开发经验，目前就职于票付通</div>
+              <div>能力水平：
+              <ol>
+                  <li>
+                    可以独立使用Vue生态(vue/vue-router/vuex/elementUI)/React生态(react/react-router/redux/antd)进行业务开发
+                  </li>
+                  <li>
+                    有参与小程序和基于Electron开发桌面APP的经验；熟悉ES6、移动端自适应开发
+                  </li>
+                  <li>可以独立使用Webpack或parcel进行打包与架构</li>
+                  <li>熟悉Git协作模式</li>
+                  <li>具有较强的学习能力与对新技术的热情</li>
+                </ol>
+              </div>
+            </div>
+          </section>
+
+          <section key="ContactMe">
+            <h1 className={style.title}>联系我</h1>
             <div className={style.content}>
               <p>
                 <i className="iconfont icon-qq" />
@@ -36,6 +66,7 @@ class About extends React.Component {
               </p>
             </div>
           </section>
+
           <section key="aboutSite">
             <h1 className={style.title}>关于本站</h1>
             <div className={style.content}>
@@ -59,7 +90,7 @@ class About extends React.Component {
                     (view)；大大降低了后续维护的复杂度。
                   </li>
                   <li>
-                    直接将demo注入页面（所有收录的代码都必须要真正实践过），同时增强了页面的生动性。
+                    直接将demo注入页面，同时增强了页面的生动性与体验感。
                   </li>
                   <li>
                     不过旧版是针对移动端和PC端设计了两版布局来自适应，新版只适配了PC端（同时适配两端调试的时候太花时间了）。

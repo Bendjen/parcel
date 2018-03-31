@@ -9,7 +9,7 @@ import About from "./page/about";
 const Main = () => (
   <Body>
     <Switch>
-      <Route exact path="/" component={Home} />
+      <Route exact path="/" component={About} />
       <Route exact path="/home/:type" component={Home} />
       <Route exact path="/detail/:type/:id" component={Detail} />
       <Route exact path="/about" component={About} />

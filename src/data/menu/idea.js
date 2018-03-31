@@ -13,11 +13,11 @@ export default {
     route: "detail",
     id: "morphing"
   },
-  webVedioOfHtml5: {
-    title: "Web播放器实现（HTML5）",
-    dependencies:['FLV.js'],
-    img: "img/idea/webVedioOfHtml5.png",
-    route: "detail",
-    id: "webVedioOfHtml5"
-  }
+  // webVedioOfHtml5: {
+  //   title: "Web播放器实现（HTML5）",
+  //   dependencies:['FLV.js'],
+  //   img: "img/idea/webVedioOfHtml5.png",
+  //   route: "detail",
+  //   id: "webVedioOfHtml5"
+  // }
 };
