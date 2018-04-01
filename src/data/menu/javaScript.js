@@ -35,5 +35,12 @@ export default {
     route: "detail",
     id: "bidirectionalBindings",
     reference: "https://mp.weixin.qq.com/s/mOs0QKayQlA7wbri4XZDfA"
-  }
+  },
+  excelExport: {
+    title: "在前端进行excel导出",
+    img: "img/javaScript/excelExport.png",
+    route: "detail",
+    id: "excelExport",
+    dependencies: ["file-saver"],
+  },
 };

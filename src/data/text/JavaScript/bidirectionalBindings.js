@@ -59,4 +59,4 @@ functionbindModelView(obj, property, domElem) {
 }`
 }];
 
-export default { htmlText, javaScriptText };
+export default {  javaScriptText };
