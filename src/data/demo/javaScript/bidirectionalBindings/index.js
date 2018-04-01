@@ -22,6 +22,7 @@ class BidirectionalBindings extends React.Component {
         },
         //通过命令设置值时同时设置所有绑定了dom的值
         set: function(value) {
+          console.log(value)
           attributeName == "value"
             ? (domElem.value = value)
             : domElem.setAttribute(attributeName, value);
@@ -39,11 +40,9 @@ class BidirectionalBindings extends React.Component {
     let that = this;
     inputElem.addEventListener("input", () => {
       console.log(that.state.name);
+    });    inputElem.addEventListener("input", () => {
+      console.log(that.state.name);
     });
-
-    setTimeout(() => {
-      this.state.name = "hahaha";
-    }, 1000);
   }
   render() {
     return (

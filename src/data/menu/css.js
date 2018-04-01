@@ -16,5 +16,12 @@ export default {
     img: "img/css/customizeProgress.png",
     route: "detail",
     id: "customizeProgress"
+  },
+  clipPath: {
+    title: "ClipPath创建图片交互效果",
+    img: "img/css/clipPath.png",
+    route: "detail",
+    id: "clipPath",
+    reference:"https://www.w3cplus.com/css/using-css-clip-path-create-interactive-effects.html"
   }
 };

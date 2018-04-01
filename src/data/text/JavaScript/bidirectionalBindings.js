@@ -26,7 +26,8 @@ function bind(object, key, domElem, attributeName = "value") {
         configurable: true
     });
 
-    //问题2：而且当通过操作dom进行更新时，并没有事件监听可以触发其他相关dom或value更新，value是只有在进行取(get)操作时才能得到dom更新的数据，也就缺少触发更新的事件
+    //问题2：而且当通过操作dom进行更新时，并没有事件监听可以触发其他相关dom或value更新(dom操作不会触发对象的set)，
+    //      value是只有在进行取(get)操作时才能得到dom更新的数据，也就缺少触发更新的事件
 }
 
 let user = { name: "" };
@@ -38,10 +39,11 @@ bind(user, "name", inputElem);`
 //这是真正的双向绑定，dom变化时通过事件触发了值的变化，值变化时通过对象监听触发了dom的变化
 //但是这种做法的缺陷是当通过代码更改dom的值（不触发dom事件下）不会触发双向绑定
 //也没有脏检测可以实现从一个 dom => doms 的一到多扩散
+//ES7支持，observe好像没最后弄过
 functionbindObjPropToDomElem(obj, property, domElem) { 
     Object.observe(obj, function(changes){    
         changes.forEach(function(change) {
-        $(domElem).text(obj[property]);        
+         $(domElem).text(obj[property]);        
         });
     });  
 }
