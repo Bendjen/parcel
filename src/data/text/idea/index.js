@@ -1,6 +1,7 @@
-import metaballs from './metaballs.js'
-import morphing from './morphing.js'
-import webVedioOfHtml5 from './webVedioOfHtml5.js'
 export default {
-    metaballs,morphing,webVedioOfHtml5
+    metaballs:require('./metaballs').default,
+    morphing:require('./morphing').default,
+    webVedioOfHtml5:require('./webVedioOfHtml5').default,
+    snake:require('./snake').default,
+    house:require('./house').default,
 }   

@@ -3,19 +3,37 @@ import style from "./index.scss";
 import { Link } from "react-router-dom";
 
 
-const clipPath = () => (
-  <div data-flex='main:center'>
-    <div className={style.flower}></div>
-    {/* <svg x="0px" y="0px" width="1000px" height="1000px" viewBox="0 0 100 100">
-      <image
-        overflow="visible"
-        width="100%"
-        height="100%"
-        xlinkHref={svg}
-        transform="matrix(0.1004 0 0 0.1729 4.882813e-004 -0.0044)"
-      />
-    </svg> */}
-  </div>
-);
+
+
+class clipPath extends React.Component {
+  componentDidMount() {
+    const bg = document.querySelector("#bg");
+    const cut = document.querySelector("#cut");
+    cut.addEventListener("mouseenter", event => {
+      bg.classList.add("dimmed");
+    });
+    cut.addEventListener("mouseleave", event => {
+      bg.classList.remove("dimmed");
+    });
+  }
+  componentWillUnmount(){
+    cut.removeEventListener("mouseenter", event => {
+      bg.classList.remo("dimmed");
+    });
+    cut.removeEventListener("mouseleave", event => {
+      bg.classList.remove("dimmed");
+    });
+  }
+  render() {
+    return (
+      <div data-flex="main:center">
+        <div className="container">
+          <div className="flower" id="bg" />
+          <div className="cut flower" id="cut" />
+        </div>
+      </div>
+    );
+  }
+}
 
 export default clipPath;

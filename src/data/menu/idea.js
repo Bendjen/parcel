@@ -13,6 +13,20 @@ export default {
     route: "detail",
     id: "morphing"
   },
+  snake: {
+    title: "Rxjs实现贪吃蛇",
+    dependencies:['rxjs'],
+    img: "img/idea/snake.png",
+    route: "detail",
+    id: "snake"
+  },
+  house: {
+    title: "福州房价数据汇总",
+    dependencies:['echarts'],
+    img: "img/idea/house.png",
+    route: "detail",
+    id: "house"
+  },
   // webVedioOfHtml5: {
   //   title: "Web播放器实现（HTML5）",
   //   dependencies:['FLV.js'],
