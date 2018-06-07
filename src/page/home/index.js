@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import QueueAnim from "rc-queue-anim";
 import style from "./index.scss";
-import { menuList } from "/parcel/src/data/map.js";
+import { menuList } from "../../data/map";
 
 // console.log(menuList);
 
@@ -48,8 +48,8 @@ class Home extends React.Component {
                     to={`/detail/${type}/${son.id}`}
                     data-flex="dir:top main:center cross:center"
                   >
-                    <img src={"./dist/" + son.img} />
-                    {/* <img src={son.img} /> */}
+                    {/* <img src={"./dist/" + son.img} /> */}
+                    <img src={son.img} />
                     <span>{son.title}</span>
                   </Link>
                 </li>

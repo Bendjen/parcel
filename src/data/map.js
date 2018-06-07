@@ -1,6 +1,6 @@
-import demoList from "/parcel/src/data/demo";
-import textList from "/parcel/src/data/text";
-import menuList from "/parcel/src/data/menu";
+import demoList from "../data/demo";
+import textList from "../data/text";
+import menuList from "../data//menu";
 
 const map = { demoList, textList, menuList };
 

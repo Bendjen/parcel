@@ -8,7 +8,8 @@
     "start": "parcel index.html",
     "build": "parcel build index.html --no-minify --no-cache --out-dir docs ",
     "dist": "parcel build index.html",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "new": "node ./create/index.js"
   },
   "license": "MIT",
   "devDependencies": {

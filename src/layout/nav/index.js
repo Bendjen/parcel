@@ -14,7 +14,7 @@ class Nav extends React.Component {
         // { name: "Utils", link: "/home/utils" },
         { name: "About", link: "/about" }
       ],
-      curIndex: 3
+      curIndex: 0
     };
   }
   handleClick(e) {

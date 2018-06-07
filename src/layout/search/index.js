@@ -2,7 +2,7 @@ import React from "react";
 import style from "./index.scss";
 import { Link } from "react-router-dom";
 import { Select } from "antd";
-import { menuList } from "/parcel/src/data/map.js";
+import { menuList } from "../../data/map";
 import createHistory from "history/createHashHistory";
 const history = createHistory();
 const Option = Select.Option;
