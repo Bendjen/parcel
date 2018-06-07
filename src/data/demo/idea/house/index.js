@@ -73,9 +73,7 @@ class House extends React.Component {
   }
   render() {
     return (
-      <div id="main" style={{ width: "100%", height: 600 }}>
-        123
-      </div>
+      <div id="main" style={{ width: "100%", height: 600 }}></div>
     );
   }
 }
