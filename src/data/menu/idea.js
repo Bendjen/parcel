@@ -27,6 +27,13 @@ export default {
     route: "detail",
     id: "house"
   },
+  draggabilly: {
+    title: "基于draggabilly的模板编辑",
+    dependencies:['draggabilly'],
+    img: "img/idea/draggabilly.png",
+    route: "detail",
+    id: "draggabilly"
+  },
   // webVedioOfHtml5: {
   //   title: "Web播放器实现（HTML5）",
   //   dependencies:['FLV.js'],
