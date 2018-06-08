@@ -1,4 +1,3 @@
-// CSS表单美化
 import React from "react";
 import style from "./index.scss";
 

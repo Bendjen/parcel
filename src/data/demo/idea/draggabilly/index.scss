@@ -38,6 +38,9 @@
 			padding: 20px;
 			background: #ddd;
 			text-align: center;	
+			p{
+				margin-bottom: 0;
+			}
 		}
 		.qrcodeItem{
 			cursor: move;
@@ -78,5 +81,11 @@
 			user-select:none;
 			text-align: center;
 		}
+	}
+}
+
+:global{
+	.ant-popover-inner-content{
+		min-width: 400px;
 	}
 }

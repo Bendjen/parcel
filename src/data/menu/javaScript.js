@@ -30,7 +30,7 @@ export default {
     type: "document"
   },
   bidirectionalBindings: {
-    title: "用JS实现双向绑定",
+    title: "用JS实现双向绑定中的问题",
     img: "img/javaScript/bidirectionalBindings.png",
     route: "detail",
     id: "bidirectionalBindings",

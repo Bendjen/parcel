@@ -111,8 +111,8 @@ class Detail extends React.Component {
           {this.textRender("功能", "html", Text.readMeText)}
           {this.textRender("使用", "javascript", Text.exampleText)}
           {this.textRender("Html", "html", Text.htmlText)}
-          {this.textRender("CSS", "css", Text.cssText)}
-          {this.textRender("JavaScript", "javascript", Text.javaScriptText)}
+          {this.textRender("JavaScript", "jsx", Text.javaScriptText)}
+          {this.textRender("CSS", "scss", Text.cssText)}
         </QueueAnim>
       </div>
     );
