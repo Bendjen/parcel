@@ -1,11 +1,11 @@
 import React from "react";
 import style from "./index.scss";
 import Rx from "rxjs/Rx";
-import init from "./code/main";
+import startGame from "./code/main";
 
 class Snake extends React.Component {
   componentDidMount() {
-    init();
+    startGame();
   }
   render() {
     return <div className={style.container} id="container" />;
