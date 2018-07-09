@@ -28,7 +28,7 @@ export default {
     reference:"https://www.w3cplus.com/css/using-css-clip-path-create-interactive-effects.html"
   },
   animationStep: {
-    title: "animation-step属性",
+    title: "animation-steps属性",
     img: "img/css/animationStep.png",
     route: "detail",
     id: "animationStep",

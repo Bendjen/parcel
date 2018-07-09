@@ -11,10 +11,10 @@ class About extends React.Component {
   render() {
     return (
       <div className={style.container}>
-        <QueueAnim
+        {/* <QueueAnim
           type={["bottom", "top"]}
           ease={["easeOutQuart", "easeInOutQuart"]}
-        >
+        > */}
           <section key="AboutMe">
             <h1 className={style.title}>关于我</h1>
             <div className={style.content}>
@@ -104,7 +104,7 @@ class About extends React.Component {
               </div>
             </div>
           </section>
-        </QueueAnim>
+        {/* </QueueAnim> */}
       </div>
     );
   }
