@@ -89,6 +89,9 @@ class Detail extends React.Component {
     Demo = demoList[routeParams.type][routeParams.id];
     Text = textList[routeParams.type][routeParams.id];
     Title = menuList[routeParams.type][routeParams.id].title;
+
+    console.log(Demo)
+    console.log(Text)
     let dependencies =
       menuList[routeParams.type][routeParams.id].dependencies || [];
     let dependenciesText = dependencies.join("、");

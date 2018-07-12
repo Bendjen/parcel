@@ -8,5 +8,6 @@ export default {
   advancedFormStyling,
   makeNavByfocusWithin,
   customizeProgress,
-  animationStep
+  animationStep,
+  clipPath
 };
