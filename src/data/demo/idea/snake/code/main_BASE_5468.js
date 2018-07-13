@@ -1,12 +1,47 @@
+import { Observable } from "rxjs/Observable";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { animationFrame } from "rxjs/scheduler/animationFrame";
+
+import { interval } from "rxjs/observable/interval";
+import { fromEvent } from "rxjs/observable/fromEvent";
+import { combineLatest } from "rxjs/observable/combineLatest";
+import { of } from "rxjs/observable/of";
+
+import { nextDirection, move, generateSnake, generateApples, eat, isGameOver } from "./utils"
+import {
+  map,
+  filter,
+  scan,
+  startWith,
+  distinctUntilChanged,
+  share,
+  withLatestFrom,
+  tap,
+  skip,
+  switchMap,
+  takeWhile,
+  first
+} from "rxjs/operators";
+
+import {
+  createCanvasElement,
+  renderScene,
+  renderApples,
+  renderSnake,
+  renderScore,
+  renderGameOver,
+  getRandomPosition,
+  checkCollision
+} from "./canvas";
+
+import { DIRECTIONS, SPEED, INITIAL_DIRECTION, SNAKE_LENGTH, POINTS_PER_APPLE, FPS } from "./constants";
 
 
-
-const javaScriptText = `
 let ticks$ = interval(SPEED);
 let click$ = fromEvent(document, "click");
 let keydown$ = fromEvent(document, "keydown");
 
-function createGame(fps$) {
+function createGame (fps$) {
 
   // 将键盘输入转换为方向输出
   let direcion$ = keydown$
@@ -30,22 +65,6 @@ function createGame(fps$) {
 
 
   let ticks$ = Observable.interval(SPEED);
-
-
-  // 这里有两种实现模式
-  // 这种触发更新的机制合并了时间和方向
-  // 结果就是时间和按键触发的频率同时会更新蛇的移动
-
-  // let snake$ = Observable.combineLatest(direcion$, ticks$, (direcion, tick) => direcion)
-  //   .withLatestFrom(snakeLength$, (direcion, snakeLength) => [direcion, snakeLength])
-  //   .scan(move, generateSnake())
-  //   .share()
-
-
-
-  // 而这种方式则只把蛇的移动绑定到时间上，每个时间点取按键的最后一次方向
-  // 这样能让蛇的移动更加平均，但是会有一个BUG就是当你在时间间隔之中快速操作了↑→↓（假设蛇原来的移动方向是下），这样这个时间点就会检测成发生碰撞结束游戏
-
   let snake$ = ticks$
     .withLatestFrom(direcion$, snakeLength$, (tick, direcion, snakeLength) => [direcion, snakeLength])
     .scan(move, generateSnake())
@@ -75,7 +94,6 @@ let game$ = of('Start Game').pipe(
 const startGame = () => {
   let canvas = createCanvasElement();
   let ctx = canvas.getContext('2d');
-  document.getElementById('container').innerHTML = ''
   document.getElementById('container').appendChild(canvas);
 
   game$.subscribe({
@@ -87,6 +105,7 @@ const startGame = () => {
     }
   })
 };
-`;
 
-export default {  javaScriptText };
+
+
+export default startGame

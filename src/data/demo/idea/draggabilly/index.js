@@ -164,7 +164,7 @@ class DraggabillyComponent extends React.Component {
 		};
 		return (
 			<Form style={{ overflow: "hidden" }}>
-				<FormItem label="类型" {...formItemLayout} style={{ marginBottom: 5 }}> <Input value={item.title} placeholder='文本标题' disabled={item.type != 'text'} onChange={(e) => this.onItemValueChange.bind(this)(e.target.value, index, 'title')} /></FormItem>
+				<FormItem label="标题" {...formItemLayout} style={{ marginBottom: 5 }}> <Input value={item.title} placeholder='文本标题' disabled={item.type != 'text'} onChange={(e) => this.onItemValueChange.bind(this)(e.target.value, index, 'title')} /></FormItem>
 				<FormItem label="内容" {...formItemLayout} style={{ marginBottom: 5 }}> <Input value={item.content} placeholder='文本内容' disabled={item.type != 'text'} onChange={(e) => this.onItemValueChange.bind(this)(e.target.value, index, 'content')} /></FormItem>
 				<FormItem label="字体大小" {...formItemLayout} style={{ marginBottom: 5 }}> <Slider min={8} max={24} value={item.font_size} disabled={item.type != 'text'} onChange={(value) => this.onItemValueChange.bind(this)(value, index, 'font_size')}></Slider></FormItem>
 				<FormItem label="尺寸" {...formItemLayout} style={{ marginBottom: 5 }}> <Slider min={4} max={10} value={item.size} disabled={item.type != 'qrcode'} onChange={(value) => this.onItemValueChange.bind(this)(value, index, 'size')}></Slider></FormItem>

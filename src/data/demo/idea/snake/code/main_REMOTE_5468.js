@@ -1,7 +1,42 @@
+import { Observable } from "rxjs/Observable";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { animationFrame } from "rxjs/scheduler/animationFrame";
+
+import { interval } from "rxjs/observable/interval";
+import { fromEvent } from "rxjs/observable/fromEvent";
+import { combineLatest } from "rxjs/observable/combineLatest";
+import { of } from "rxjs/observable/of";
+
+import { nextDirection, move, generateSnake, generateApples, eat, isGameOver } from "./utils"
+import {
+  map,
+  filter,
+  scan,
+  startWith,
+  distinctUntilChanged,
+  share,
+  withLatestFrom,
+  tap,
+  skip,
+  switchMap,
+  takeWhile,
+  first
+} from "rxjs/operators";
+
+import {
+  createCanvasElement,
+  renderScene,
+  renderApples,
+  renderSnake,
+  renderScore,
+  renderGameOver,
+  getRandomPosition,
+  checkCollision
+} from "./canvas";
+
+import { DIRECTIONS, SPEED, INITIAL_DIRECTION, SNAKE_LENGTH, POINTS_PER_APPLE, FPS } from "./constants";
 
 
-
-const javaScriptText = `
 let ticks$ = interval(SPEED);
 let click$ = fromEvent(document, "click");
 let keydown$ = fromEvent(document, "keydown");
@@ -87,6 +122,7 @@ const startGame = () => {
     }
   })
 };
-`;
 
-export default {  javaScriptText };
+
+
+export default startGame

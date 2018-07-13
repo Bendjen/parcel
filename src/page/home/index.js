@@ -38,23 +38,23 @@ class Home extends React.Component {
       <div className={style.container} data-flex="main:justify">
         {cols.map((item, index) => (
           <ul className={style.list} key={index}>
-            <QueueAnim
-              type={["bottom", "top"]}
-              ease={["easeInQuart"]}
-            >
-              {item.map((son, index) => (
-                <li key={son.id}>
-                  <Link
-                    to={`/detail/${type}/${son.id}`}
-                    data-flex="dir:top main:center cross:center"
-                  >
-                    {/* <img src={"./dist/" + son.img} /> */}
-                    <img src={son.img} />
-                    <span>{son.title}</span>
-                  </Link>
-                </li>
-              ))}
-            </QueueAnim>
+            {/* <QueueAnim
+			  type={["bottom", "top"]}
+			  ease={["easeInQuart"]}
+			> */}
+            {item.map((son, index) => (
+              <li key={son.id}>
+                <Link
+                  to={`/detail/${type}/${son.id}`}
+                  data-flex="dir:top main:center cross:center"
+                >
+                  {/* <img src={"./dist/" + son.img} /> */}
+                  <img src={son.img} />
+                  <span>{son.title}</span>
+                </Link>
+              </li>
+            ))}
+            {/* </QueueAnim> */}
           </ul>
         ))}
       </div>

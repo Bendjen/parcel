@@ -66,6 +66,8 @@ function createGame(fps$) {
 		.startWith(0) //订阅者snakeLength$将使得 share() 订阅底层的数据源，而底层的数据源会立即发出值，当随后的订阅再发生时，这个值其实是已经存在了的,所以BehaviorSubject 的初始值只出现在 snakeLength$ 中，而并没有出现在 score$ 中
 		.scan((score) => score + POINTS_PER_APPLE)
 
+<<<<<<< HEAD
+=======
   let ticks$ = Observable.interval(SPEED);
 
 
@@ -87,6 +89,7 @@ function createGame(fps$) {
     .withLatestFrom(direcion$, snakeLength$, (tick, direcion, snakeLength) => [direcion, snakeLength])
     .scan(move, generateSnake())
     .share()
+>>>>>>> 9f850186df3cfc50c07e79615be9dadf81c4fa60
 
 	// 自然源 （时间 => 蛇的移动 => 触发吃（修改苹果的位置和蛇的长度））
 	// 流3： 时间源 => (snake,apple)
@@ -120,6 +123,20 @@ let game$ = of('Start Game').pipe(
 );
 
 const startGame = () => {
+<<<<<<< HEAD
+	let canvas = createCanvasElement();
+	let ctx = canvas.getContext('2d');
+	document.getElementById('container').appendChild(canvas);
+
+	game$.subscribe({
+		next: (scene) => renderScene(ctx, scene),
+		complete: () => {
+			renderGameOver(ctx);
+
+			click$.pipe(first()).subscribe(startGame);
+		}
+	})
+=======
   let canvas = createCanvasElement();
   let ctx = canvas.getContext('2d');
   document.getElementById('container').innerHTML = ''
@@ -133,6 +150,7 @@ const startGame = () => {
       click$.pipe(first()).subscribe(startGame);
     }
   })
+>>>>>>> 9f850186df3cfc50c07e79615be9dadf81c4fa60
 };
 
 
