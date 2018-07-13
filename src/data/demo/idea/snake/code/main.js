@@ -9,29 +9,29 @@ import { of } from "rxjs/observable/of";
 
 import { nextDirection, move, generateSnake, generateApples, eat, isGameOver } from "./utils"
 import {
-  map,
-  filter,
-  scan,
-  startWith,
-  distinctUntilChanged,
-  share,
-  withLatestFrom,
-  tap,
-  skip,
-  switchMap,
-  takeWhile,
-  first
+	map,
+	filter,
+	scan,
+	startWith,
+	distinctUntilChanged,
+	share,
+	withLatestFrom,
+	tap,
+	skip,
+	switchMap,
+	takeWhile,
+	first
 } from "rxjs/operators";
 
 import {
-  createCanvasElement,
-  renderScene,
-  renderApples,
-  renderSnake,
-  renderScore,
-  renderGameOver,
-  getRandomPosition,
-  checkCollision
+	createCanvasElement,
+	renderScene,
+	renderApples,
+	renderSnake,
+	renderScore,
+	renderGameOver,
+	getRandomPosition,
+	checkCollision
 } from "./canvas";
 
 import { DIRECTIONS, SPEED, INITIAL_DIRECTION, SNAKE_LENGTH, POINTS_PER_APPLE, FPS } from "./constants";
@@ -43,67 +43,74 @@ let keydown$ = fromEvent(document, "keydown");
 
 function createGame (fps$) {
 
-  // 将键盘输入转换为方向输出
-  let direcion$ = keydown$
-    .map(event => DIRECTIONS[event.keyCode])
-    .filter(direcion => !!direcion)
-    .scan(nextDirection)
-    .startWith(INITIAL_DIRECTION)
-    .distinctUntilChanged() //过滤相同的值
+	// 外部源（键盘 => 方向 =>  蛇）
+	// 流1：键盘输入源  
+	let direcion$ = keydown$
+		.map(event => DIRECTIONS[event.keyCode])
+		.filter(direcion => !!direcion)
+		.scan(nextDirection)
+		.startWith(INITIAL_DIRECTION)					//对于非interval这种自然流，需要手动触发的流如keydown$\click$\BehaviorSubject 需要设置初始值才能自动开始第一个动作，否者需要所有动作都触发后才会开始
+		.distinctUntilChanged() //过滤相同的值
 
 
-  // length作为 BehaviorSubject 既是观察者也可以是被观察到的状态，被传播状态 
-  let length$ = new BehaviorSubject(SNAKE_LENGTH);
+	// 人为源 (长度 =>  蛇的长度  =>  比分，蛇的位置  )
+	// 流2：subject源  
+	let length$ = new BehaviorSubject(SNAKE_LENGTH);	//当流是hot的时候，BehaviorSubject的初始值只对第一级订阅的流形成初始值，后面的流需要自己设置初始值才会启动
 
-  let snakeLength$ = length$
-    .scan((step, snakeLength) => snakeLength + step)
-    .share()
-
-  let score$ = snakeLength$
-    .startWith(0)
-    .scan((score) => score + POINTS_PER_APPLE)
+	let snakeLength$ = length$
+		.scan((step, snakeLength) => snakeLength + step)
+		.share()
 
 
-  let ticks$ = Observable.interval(SPEED);
-  let snake$ = ticks$
-    .withLatestFrom(direcion$, snakeLength$, (tick, direcion, snakeLength) => [direcion, snakeLength])
-    .scan(move, generateSnake())
-    .share()
+	let score$ = snakeLength$
+		.startWith(0) //订阅者snakeLength$将使得 share() 订阅底层的数据源，而底层的数据源会立即发出值，当随后的订阅再发生时，这个值其实是已经存在了的,所以BehaviorSubject 的初始值只出现在 snakeLength$ 中，而并没有出现在 score$ 中
+		.scan((score) => score + POINTS_PER_APPLE)
 
-  let apples$ = snake$
-    .scan(eat, generateApples())
-    .distinctUntilChanged()
-    .share();
 
-  let appleEaten$ = apples$
-    .skip(1)
-    .do(() => length$.next(POINTS_PER_APPLE))
-    .subscribe();
+	// 自然源 （时间 => 蛇的移动 => 触发吃（修改苹果的位置和蛇的长度））
+	// 流3： 时间源 => (snake,apple)
+	let ticks$ = Observable.interval(SPEED);
+	let snake$ = ticks$
+		.withLatestFrom(direcion$, snakeLength$, (tick, direcion, snakeLength) => [direcion, snakeLength])
+		.scan(move, generateSnake())
+		.share()
 
-  let scene$ = Observable.combineLatest(snake$, apples$, score$, (snake, apples, score) => ({ snake, apples, score }));
+	let apples$ = snake$
+		.scan(eat, generateApples())
+		.distinctUntilChanged()  //排除没吃到苹果的事件
+		.share();
 
-  return fps$.pipe(withLatestFrom(scene$, (_, scene) => scene));
+	let appleEaten$ = apples$
+		.skip(1)
+		.do(() => length$.next(POINTS_PER_APPLE))     //每次吃到苹果触发length$的更新,相当于再subscribe里面next
+		.subscribe();       //applesEaten$只负责通知其他的流，而不会有观察者来订阅它。因此需要手动订阅。
+
+	// combineLatest是当各个流有任何一个流有状态变更的时候就取他们的合并  
+	let scene$ = Observable.combineLatest(snake$, apples$, score$, (snake, apples, score) => ({ snake, apples, score }));
+
+	//withLatestFrom是根据当前流(fps$)的每次状态变更合并其他流的最后一次状态
+	return fps$.pipe(withLatestFrom(scene$, (_, scene) => scene));
 }
 
 let game$ = of('Start Game').pipe(
-  map(() => interval(1000 / FPS, animationFrame)),
-  switchMap(createGame),
-  takeWhile(scene => !isGameOver(scene))
+	map(() => interval(1000 / FPS, animationFrame)),
+	switchMap(createGame),
+	takeWhile(scene => !isGameOver(scene))
 );
 
 const startGame = () => {
-  let canvas = createCanvasElement();
-  let ctx = canvas.getContext('2d');
-  document.getElementById('container').appendChild(canvas);
+	let canvas = createCanvasElement();
+	let ctx = canvas.getContext('2d');
+	document.getElementById('container').appendChild(canvas);
 
-  game$.subscribe({
-    next: (scene) => renderScene(ctx, scene),
-    complete: () => {
-      renderGameOver(ctx);
+	game$.subscribe({
+		next: (scene) => renderScene(ctx, scene),
+		complete: () => {
+			renderGameOver(ctx);
 
-      click$.pipe(first()).subscribe(startGame);
-    }
-  })
+			click$.pipe(first()).subscribe(startGame);
+		}
+	})
 };
 
 

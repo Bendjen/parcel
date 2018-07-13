@@ -11,10 +11,14 @@ export function nextDirection (previous, next) {
     }
 }
 
+// 蛇的移动
+// 1.每次触发朝当前方向移动一个
 export function move (snake, [direction, snakeLength]) {
+    // 蛇头
     let nx = snake[0].x;
     let ny = snake[0].y;
 
+    // 转向
     nx += 1 * direction.x;
     ny += 1 * direction.y;
 
@@ -33,6 +37,7 @@ export function move (snake, [direction, snakeLength]) {
     return snake;
 }
 
+// 初始蛇的图像坐标
 export function generateSnake () {
     let snake = [];
 
