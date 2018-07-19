@@ -41,7 +41,7 @@ let ticks$ = interval(SPEED);
 let click$ = fromEvent(document, "click");
 let keydown$ = fromEvent(document, "keydown");
 
-function createGame(fps$) {
+function createGame (fps$) {
 
 	// 外部源（键盘 => 方向 =>  蛇）
 	// 流1：键盘输入源  
@@ -66,27 +66,20 @@ function createGame(fps$) {
 		.startWith(0) //订阅者snakeLength$将使得 share() 订阅底层的数据源，而底层的数据源会立即发出值，当随后的订阅再发生时，这个值其实是已经存在了的,所以BehaviorSubject 的初始值只出现在 snakeLength$ 中，而并没有出现在 score$ 中
 		.scan((score) => score + POINTS_PER_APPLE)
 
-  let ticks$ = Observable.interval(SPEED);
 
+	// 这里有两种实现模式
+	// 这种触发更新的机制合并了时间和方向
+	// 结果就是时间和按键触发的频率同时会更新蛇的移动
 
-  // 这里有两种实现模式
-  // 这种触发更新的机制合并了时间和方向
-  // 结果就是时间和按键触发的频率同时会更新蛇的移动
-
-  // let snake$ = Observable.combineLatest(direcion$, ticks$, (direcion, tick) => direcion)
-  //   .withLatestFrom(snakeLength$, (direcion, snakeLength) => [direcion, snakeLength])
-  //   .scan(move, generateSnake())
-  //   .share()
+	// let snake$ = Observable.combineLatest(direcion$, ticks$, (direcion, tick) => direcion)
+	//   .withLatestFrom(snakeLength$, (direcion, snakeLength) => [direcion, snakeLength])
+	//   .scan(move, generateSnake())
+	//   .share()
 
 
 
-  // 而这种方式则只把蛇的移动绑定到时间上，每个时间点取按键的最后一次方向
-  // 这样能让蛇的移动更加平均，但是会有一个BUG就是当你在时间间隔之中快速操作了↑→↓（假设蛇原来的移动方向是下），这样这个时间点就会检测成发生碰撞结束游戏
-
-  let snake$ = ticks$
-    .withLatestFrom(direcion$, snakeLength$, (tick, direcion, snakeLength) => [direcion, snakeLength])
-    .scan(move, generateSnake())
-    .share()
+	// 而这种方式则只把蛇的移动绑定到时间上，每个时间点取按键的最后一次方向
+	// 这样能让蛇的移动更加平均，但是会有一个BUG就是当你在时间间隔之中快速操作了↑→↓（假设蛇原来的移动方向是下），这样这个时间点就会检测成发生碰撞结束游戏
 
 	// 自然源 （时间 => 蛇的移动 => 触发吃（修改苹果的位置和蛇的长度））
 	// 流3： 时间源 => (snake,apple)
@@ -120,19 +113,19 @@ let game$ = of('Start Game').pipe(
 );
 
 const startGame = () => {
-  let canvas = createCanvasElement();
-  let ctx = canvas.getContext('2d');
-  document.getElementById('container').innerHTML = ''
-  document.getElementById('container').appendChild(canvas);
+	let canvas = createCanvasElement();
+	let ctx = canvas.getContext('2d');
+	document.getElementById('container').innerHTML = ''
+	document.getElementById('container').appendChild(canvas);
 
-  game$.subscribe({
-    next: (scene) => renderScene(ctx, scene),
-    complete: () => {
-      renderGameOver(ctx);
+	game$.subscribe({
+		next: (scene) => renderScene(ctx, scene),
+		complete: () => {
+			renderGameOver(ctx);
 
-      click$.pipe(first()).subscribe(startGame);
-    }
-  })
+			click$.pipe(first()).subscribe(startGame);
+		}
+	})
 };
 
 

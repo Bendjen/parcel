@@ -4,7 +4,6 @@
 *.txt
 *.map
 node_modules/
-dist/
 .vscode
 .DS_Store
 .cache/
