@@ -34,6 +34,28 @@ class About extends React.Component {
 					]
 				},
 				{
+					type: 'React',
+					title: 'React',
+					articles: [
+						{ title: 'React Router 4.x 雷区', url: 'https://jdc.jd.com/archives/212552' },
+					]
+				},
+				{
+					type: 'TypeScript',
+					title: 'TypeScript',
+					articles: [
+						{ title: 'vue + typescript 新项目起手式', url: 'https://segmentfault.com/a/1190000011744210#articleHeader12' },
+						{ title: 'vue + typescript 进阶篇', url: 'https://segmentfault.com/a/1190000011878086' },
+					]
+				},
+				{
+					type: 'Rxjs',
+					title: 'Rxjs',
+					articles: [
+						{ title: '利用Rxjs处理复杂异步请求数据流', url: 'https://zhuanlan.zhihu.com/p/28958042' },
+					]
+				},
+				{
 					type:'AR/VR',
 					title:'AR/VR',
 					articles:[
