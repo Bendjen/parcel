@@ -10,6 +10,7 @@ import { Badge } from "antd";
 import QueueAnim from "rc-queue-anim";
 //所有资源的map
 import { demoList, menuList, textList } from "../../data/map";
+import Loadable from 'react-loadable';
 
 //对应当前路由的数据
 let Demo, Text, Title;
