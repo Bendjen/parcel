@@ -1,6 +1,9 @@
 GitPage预览： https://bendjen.github.io/parcel/
 
 ## 个人收录站-初版（已停止维护）
+> * 重构了整体架构，尝试采用parcel代替webpack
+> * 重新设计了页面与功能方向，后续在整体页面上延续这一版的风格
+> * 但是这一版的目录结构上仍然又较多冗余之处，在后续迁移到typeScript的版本中优化掉
 
 ## 依赖
 
